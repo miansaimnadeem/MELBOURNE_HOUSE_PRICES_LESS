@@ -38,5 +38,23 @@ print("\nMissing Values after handling 'Price' and Feature Engineering 'Data':")
 print(df.isnull().sum())
 
 
+categorical_cols = df.select_dtypes(include='object').columns
+print(f"\nCategorical columns before encoding: {categorical_cols.tolist()}")
+
+
+print("\nUnique values in categorical columns:")
+for col in categorical_cols:
+    print(f"{col}: {df[col].nunique()} unique values")
+
+
+df_encoded = pd.get_dummies(df, columns=categorical_cols, drop_first=True)
+
+print("\nFirst 5 rows after feature engineering and encoding:")
+print(df_encoded.head())
+
+print("\nInfo after feature engineering and encoding:")
+print(df_encoded.info())
+
+df_encoded.to_csv('melbourne_housing_processed.csv', index=False)
 
    
