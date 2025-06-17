@@ -22,3 +22,21 @@ print(df.describe())
 print("\nMissing Values before Feature Engineering:")
 print(df.isnull().sum())
 
+# missing values
+
+df.dropna(subset=['Price'], inplace=True)
+
+df['Date']=pd.to_datetime(df['Date'], format='%d/%m/%Y') 
+df['Year'] = df['Data'].dt.year
+df['Month'] = df['Data'].dt.month
+df['Day'] = df['Data'].dt.day
+df['DayOfWeek']=df['Data'].dt.dayofweek
+
+df.drop(['Date','Address'], axis=1, inplace=True)
+
+print("\nMissing Values after handling 'Price' and Feature Engineering 'Data':")
+print(df.isnull().sum())
+
+
+
+   
