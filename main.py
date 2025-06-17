@@ -7,7 +7,7 @@ print("Current working directory:", os.getcwd())
 try:
 	df = pd.read_csv(r'F:\Universty\4th Semester\Intro to Ds\MELBOURNE_HOUSE_PRICES_LESS.csv')
 except FileNotFoundError:
-	print("Error: The file 'Electric_Vehicle_Population_Data.csv' was not found. Please check the file path and ensure the file exists in the directory above.")
+	print("Error: Please check the file path and ensure the file exists in the directory above.")
 	exit()
  
 print("Initial Data Info:")
@@ -91,10 +91,8 @@ sns.heatmap(numerical_df.corr(), annot=True, cmap='coolwarm', fmt=".2f")
 plt.title('Correlation Matrix of Numerical Features and Price')
 plt.savefig('correlation_matrix.png')
 
-# 4. Relationships between key categorical features and Price (using original df before one-hot encoding for easier plotting)
-# Reload original df to easily access original categorical columns for plotting
 df_original = pd.read_csv('MELBOURNE_HOUSE_PRICES_LESS.csv')
-df_original.dropna(subset=['Price'], inplace=True) # Ensure 'Price' is not missing
+df_original.dropna(subset=['Price'], inplace=True)
 
 categorical_for_plotting = ['Type', 'Method', 'Regionname']
 
@@ -104,11 +102,9 @@ for i, col in enumerate(categorical_for_plotting):
     sns.boxplot(x=col, y='Price', data=df_original, palette='viridis')
     plt.title(f'Price by {col}')
     plt.xlabel(col)
-    plt.ylabel('Price')
-    plt.xticks(rotation=45, ha='right') # Rotate labels for better readability
+    plt.ylabel('Price')   
+    plt.xticks(rotation=45, ha='right')     
 plt.tight_layout()
 plt.savefig('categorical_features_price_boxplot.png')
 
-print("EDA and Feature Engineering complete. Plots saved as .png files and processed data saved as melbourne_housing_processed.csv.")
-
-   
+print("EDA and Feature Engineering complete. Plots saved as .png files and processed data saved as melbourne_housing_processed.csv.")   
